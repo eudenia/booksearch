@@ -1,27 +1,73 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <h1 class="mat-display-1">Jackdaws love my big sphinx of quartz.</h1>
-  <h2 class="mat-h2">The quick brown fox jumps over the lazy dog.</h2>
-  <br/>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div fxLayout="row" fxLayoutAlign="center center" fxFill>
+  <div class="input-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="isbn" placeholder="ISBN" size="13">
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="consultaIsbn()">Consultar por ISBN</button>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" fxFill>
+    <div class="input-container">
+      <mat-form-field>
+        <input matInput [(ngModel)]="titulo" placeholder="Título" size="13">
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="consultaTitulo()">Consultar por título</button>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+      <div class="input-container">
+        <mat-form-field>
+          <input matInput [(ngModel)]="autor" placeholder="Autor" size="13">
+        </mat-form-field>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="consultaAutor()">Consultar por autor</button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+        <div class="button-container">
+          <button mat-raised-button color="accent" (click)="limpar()">Limpar tudo</button>
+        </div>
+      </div>
+        
+<div *ngIf="books!=null">
+  <table *ngIf="books.totalItems>0" style="border: 1px solid black;">
+    <thead>
+      <th width="5%">&nbsp;</th>
+      <th width="25%">Título</th>
+      <th width="25%">Autor(es)</th>
+      <th width="25%">Descrição</th>
+      <th width="20%">Editora</th>
+    </thead>
+    <tr *ngFor="let volume of books.items" >
+        <td>
+          <span *ngIf="checkProp(volume.volumeInfo.imageLinks?.smallThumbnail)">
+          <img src="{{volume.volumeInfo.imageLinks.smallThumbnail}}"/>
+        </span>
+        </td>
+      <td>
+        {{volume.volumeInfo.title}}
+      </td>
+      <td >
+        <ul>
+            <li *ngFor="let autor of volume.volumeInfo.authors">
+              {{autor}}
+            </li>
+        </ul>
+        </td>
+        <td>
+          {{volume.volumeInfo.description}}
+        </td>
+        <td>
+            {{volume.volumeInfo.publisher}}
+        </td>
+    </tr>
+  </table>
+  <div *ngIf="books.totalItems==0">
+    <h1>Nenhum livro foi encontrado com o {{consulta}}: {{dado}}</h1>
+  </div>
 </div>

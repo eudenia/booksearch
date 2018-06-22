@@ -1,8 +1,15 @@
-.sidenav-container {
-  height: 100%;
+mat-toolbar{
+  vertical-align: middle;
 }
 
-.sidenav {
-  width: 200px;
-  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+.tituloApp{
+  font-size: 1.5em;
 }
+
+.loginApp{
+  font-size: 0.8em;
+}
+a { 
+  color: inherit; 
+  text-decoration: none;
+} 
