@@ -18,7 +18,7 @@ export class InicialComponent  implements OnInit {
   mostraNomeArquivo:boolean;
   consulta: string;
   dado: string;
-  books: Book[];
+  books: any[];
 
   constructor(private _consultaGoogle: ConsultaGoogleService,
               private _servicoGravacao: MarcusService,
@@ -73,6 +73,6 @@ export class InicialComponent  implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this._excelService.exportAsExcelFile(this._servicoGravacao.recuperaLivrosSalvos(), this.arquivo);
+    this._excelService.exportAsExcelFile(this._servicoGravacao.recuperaLivrosParaExportar(), this.arquivo);
   }
 }
