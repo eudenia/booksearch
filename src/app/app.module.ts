@@ -46,6 +46,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { InicialComponent } from './inicial/inicial.component';
 
 import {ConsultaGoogleService} from './services/consulta.google.service';
+import {ExcelService} from './services/excel.service';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import {ConsultaGoogleService} from './services/consulta.google.service';
     MatStepperModule,    
     FlexLayoutModule
   ],
-  providers: [ConsultaGoogleService],
+  providers: [ConsultaGoogleService, ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

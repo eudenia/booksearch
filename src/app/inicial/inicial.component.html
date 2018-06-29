@@ -9,62 +9,82 @@
   </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+  <div class="input-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="titulo" placeholder="Título" size="13">
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="consultaTitulo()">Consultar por título</button>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" fxFill>
+  <div class="input-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="autor" placeholder="Autor" size="13">
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="consultaAutor()">Consultar por autor</button>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" fxFill>
+  <div class="button-container">
+    <button mat-raised-button color="accent" (click)="limpar()">Limpar tudo</button>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="accent" (click)="mostrarNomeArquivo()">Exportar para excel</button>
+  </div>
+</div>
+
+<div *ngIf="mostraNomeArquivo">
+  <div fxLayout="row" fxLayoutAlign="center center" fxFill>
     <div class="input-container">
       <mat-form-field>
-        <input matInput [(ngModel)]="titulo" placeholder="Título" size="13">
+        <input matInput [(ngModel)]="arquivo" placeholder="Nome do arquivo" size="13">
       </mat-form-field>
     </div>
     <div class="button-container">
-      <button mat-raised-button color="primary" (click)="consultaTitulo()">Consultar por título</button>
+      <button mat-raised-button color="primary" (click)="exportAsXLSX()">Exportar</button>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center center" fxFill>
-      <div class="input-container">
-        <mat-form-field>
-          <input matInput [(ngModel)]="autor" placeholder="Autor" size="13">
-        </mat-form-field>
-      </div>
-      <div class="button-container">
-        <button mat-raised-button color="primary" (click)="consultaAutor()">Consultar por autor</button>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center" fxFill>
-        <div class="button-container">
-          <button mat-raised-button color="accent" (click)="limpar()">Limpar tudo</button>
-        </div>
-      </div>
-        
+</div>
+
 <div *ngIf="books!=null">
   <table *ngIf="books.totalItems>0" style="border: 1px solid black;">
     <thead>
       <th width="5%">&nbsp;</th>
-      <th width="25%">Título</th>
+      <th width="20%">Título</th>
       <th width="25%">Autor(es)</th>
       <th width="25%">Descrição</th>
       <th width="20%">Editora</th>
+      <th width="5%">Salvar</th>
     </thead>
-    <tr *ngFor="let volume of books.items" >
-        <td>
-          <span *ngIf="checkProp(volume.volumeInfo.imageLinks?.smallThumbnail)">
-          <img src="{{volume.volumeInfo.imageLinks.smallThumbnail}}"/>
+    <tr *ngFor="let volume of books.items">
+      <td>
+        <span *ngIf="checkProp(volume.volumeInfo.imageLinks?.smallThumbnail)">
+          <img src="{{volume.volumeInfo.imageLinks.smallThumbnail}}" />
         </span>
-        </td>
+      </td>
       <td>
         {{volume.volumeInfo.title}}
       </td>
-      <td >
+      <td>
         <ul>
-            <li *ngFor="let autor of volume.volumeInfo.authors">
-              {{autor}}
-            </li>
+          <li *ngFor="let autor of volume.volumeInfo.authors">
+            {{autor}}
+          </li>
         </ul>
-        </td>
-        <td>
-          {{volume.volumeInfo.description}}
-        </td>
-        <td>
-            {{volume.volumeInfo.publisher}}
-        </td>
+      </td>
+      <td>
+        {{volume.volumeInfo.description}}
+      </td>
+      <td>
+        {{volume.volumeInfo.publisher}}
+      </td>
+      <td>
+        <button mat-raised-button color="warn" (click)="adicionarLivro(volume)">Gravar</button>
+      </td>
     </tr>
   </table>
   <div *ngIf="books.totalItems==0">
