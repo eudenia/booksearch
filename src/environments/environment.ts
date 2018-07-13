@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  googleURL:'https://www.googleapis.com/books/v1/volumes?projection=lite&key='
+  production: false
 };
 
 /*
