@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  googleURL:'https://www.googleapis.com/books/v1/volumes?projection=lite&key=AIzaSyCrhGz-FyYMnBobhdUxPyXRl9RgFp-N0F0'
+  googleURL:'https://www.googleapis.com/books/v1/volumes?projection=lite&key=',
+  openlibraryURL:"https://openlibrary.org/api/books?format=json&jscmd=data&bibkeys=ISBN:"
 };
 
 /*

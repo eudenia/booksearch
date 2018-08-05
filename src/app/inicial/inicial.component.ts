@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConsultaGoogleService } from '../services/consulta.google.service';
+import { ConsultaOpenLibraryService } from '../services/consultaopenlibrary.service';
 import { MarcusService } from '../services/marcus.service';
 import { ExcelService } from '../services/excel.service';
 import { Book } from '../shared/book';
@@ -19,8 +20,10 @@ export class InicialComponent  implements OnInit {
   consulta: string;
   dado: string;
   books: any[];
+  resp:any[];
 
   constructor(private _consultaGoogle: ConsultaGoogleService,
+              private _consultaOlib: ConsultaOpenLibraryService,
               private _servicoGravacao: MarcusService,
               private _excelService: ExcelService) {
       
@@ -31,11 +34,15 @@ export class InicialComponent  implements OnInit {
   }
 
   public consultaIsbn() {
+    console.log(this.resp);
     this.books = null;
     this.consulta = 'ISBN';
     this.dado = this.isbn;
     this._consultaGoogle.consultarIsbn(this.isbn).subscribe(resposta => this.books = resposta);
+     this._consultaOlib.consultarIsbn(this.isbn).subscribe(resposta => this.resp.push(resposta));
     console.log(this.books);
+    console.log(this.resp);
+    //this.books.push(resp);
   }
   public consultaTitulo() {
     this.books = null;

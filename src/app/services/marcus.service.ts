@@ -26,7 +26,11 @@ export class MarcusService {
         reg["Link capa"]=volume.volumeInfo.imageLinks.smallThumbnail;
       }
       reg.Título=volume.volumeInfo.title;
-      reg.Autor=volume.volumeInfo.authors.toString();
+      if(volume.volumeInfo.authors){
+        reg.Autor=volume.volumeInfo.authors.toString();
+      } else {
+        reg.Autor="Não encontrado";
+      }
       reg.Resumo=volume.volumeInfo.description;
       reg.Editora=volume.volumeInfo.publisher;
       reg["Data de publicação"]=volume.volumeInfo.publishedDate;
